@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
-form {
-  margin: auto;
-  width: 30%;
-  padding: 10px;
-}
+
 input:not(#agreement) {
   width: 350px;
 }
@@ -14,16 +10,9 @@ input:not(#agreement) {
   color: red;
   font-size: 13px;
 }
+#agreement {
+  margin-left: 100px;
+}
 .agree {
-  margin-right: 80px;
-}
-.flex {
-  justify-content: center;
-  width: 400px;
-  /* border: 5px solid #ffff00; */
-  display: flex;
-  align-items: center;
-}
-.reg {
-  margin-left: 30px;
+  margin-left: 10px;
 }
