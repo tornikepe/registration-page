@@ -1,0 +1,351 @@
+<form [formGroup]="loginForm">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label"
+      ><span class="asterics">* </span>E-mail:
+    </label>
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      formControlName="email"
+    />
+
+    <span
+      class="errors"
+      *ngIf="!loginForm.get('email')?.valid && loginForm.get('email')?.touched"
+      >E-mail is not valid</span
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"
+      ><span class="asterics">* </span>Password:
+    </label>
+    <input
+      type="password"
+      class="form-control"
+      id="exampleInputPassword1"
+      formControlName="password"
+    />
+
+    <span
+      class="errors"
+      *ngIf="
+        !loginForm.get('password')?.valid && loginForm.get('password')?.touched
+      "
+      >Password is notvalid</span
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"
+      ><span class="asterics">* </span>Confirm Password:
+    </label>
+    <input
+      type="password"
+      class="form-control"
+      id="exampleInputPassword1"
+      formControlName="confirm_password"
+    />
+
+    <span
+      class="errors"
+      *ngIf="
+        !loginForm.get('confirm_password')?.valid &&
+        loginForm.get('confirm_password')?.touched
+      "
+      >Confirm Password is not valid</span
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"
+      ><span class="asterics">* </span>Nickname:
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputPassword1"
+      formControlName="nickname"
+    />
+
+    <span
+      class="errors"
+      *ngIf="
+        !loginForm.get('nickname')?.valid && loginForm.get('nickname')?.touched
+      "
+      >Nickname Password is not valid</span
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"
+      ><span class="asterics">* </span>Phone Number:
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputPassword1"
+      formControlName="phone_number"
+    />
+
+    <span
+      class="errors"
+      *ngIf="
+        !loginForm.get('phone_number')?.valid &&
+        loginForm.get('phone_number')?.touched
+      "
+      >Phone Number Password is not valid</span
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"
+      ><span class="asterics">* </span>Website:
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputPassword1"
+      formControlName="websites"
+    />
+
+    <span
+      class="errors"
+      *ngIf="
+        !loginForm.get('websites')?.valid && loginForm.get('websites')?.touched
+      "
+      >Websites is not valid</span
+    >
+  </div>
+
+  <div class="flex">
+    <div class="agreement">
+      <input type="checkbox" id="agreement" formControlName="checkbox" />
+      <label class="agree" for="agreement"
+        >I have read the <a href="" id="button">agreement</a></label
+      >
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-success reg"
+      (click)="postUserDetails()"
+      [disabled]="
+        !loginForm.get('confirm_password')?.valid ||
+        !loginForm.get('checkbox')?.value
+      "
+    >
+      Register
+    </button>
+  </div>
+</form>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">E-mail:</th>
+      <th scope="col">Password:</th>
+      <th scope="col">Confirm Password:</th>
+      <th scope="col">Nickname:</th>
+      <th scope="col">Phone Number:</th>
+      <th scope="col">Website:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of userData">
+      <td>{{ row.email }}</td>
+      <td>{{ row.password }}</td>
+      <td>{{ row.confirm_password }}</td>
+      <td>{{ row.nickname }}</td>
+      <td>{{ row.phone_number }}</td>
+      <td>{{ row.websites }}</td>
+      <td>
+        <button
+          (click)="onEdit(row)"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          class="btn btn-info"
+        >
+          Edit
+        </button>
+        <button (click)="deleteUser(row)" class="btn btn-danger mx-3">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="loginForm">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              ><span class="asterics">* </span>E-mail:
+            </label>
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              formControlName="email"
+            />
+
+            <span
+              class="errors"
+              *ngIf="
+                !loginForm.get('email')?.valid &&
+                loginForm.get('email')?.touched
+              "
+              >E-mail is not valid</span
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              ><span class="asterics">* </span>Password:
+            </label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="password"
+            />
+
+            <span
+              class="errors"
+              *ngIf="
+                !loginForm.get('password')?.valid &&
+                loginForm.get('password')?.touched
+              "
+              >Password is not valid</span
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              ><span class="asterics">* </span>Confirm Password:
+            </label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="confirm_password"
+            />
+
+            <span
+              class="errors"
+              *ngIf="
+                !loginForm.get('confirm_password')?.valid &&
+                loginForm.get('confirm_password')?.touched
+              "
+              >Confirm Password is not valid</span
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              ><span class="asterics">* </span>Nickname:
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="nickname"
+            />
+
+            <span
+              class="errors"
+              *ngIf="
+                !loginForm.get('nickname')?.valid &&
+                loginForm.get('nickname')?.touched
+              "
+              >Nickname Password is not valid</span
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              ><span class="asterics">* </span>Phone Number:
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="phone_number"
+            />
+
+            <span
+              class="errors"
+              *ngIf="
+                !loginForm.get('phone_number')?.valid &&
+                loginForm.get('phone_number')?.touched
+              "
+              >Phone Number Password is not valid</span
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              ><span class="asterics">* </span>Website:
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="websites"
+            />
+
+            <span
+              class="errors"
+              *ngIf="
+                !loginForm.get('websites')?.valid &&
+                loginForm.get('websites')?.touched
+              "
+              >Websites is not valid</span
+            >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="cancel"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          *ngIf="showUpdate"
+          class="btn btn-primary"
+          (click)="uptadeUserDetails()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
